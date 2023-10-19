@@ -99,7 +99,6 @@ int main
                                , &k::session::run, &session );
 
     // Parse stdin until EOF (CTRL-D in Unix, CTRL-Z-Enter on Windows))
-    std::cout << "Enter \"help\" to see available actions" << std::endl;
     for ( std::string line; std::getline( std::cin, line ); )
     {
         auto const tokens = split( line );
