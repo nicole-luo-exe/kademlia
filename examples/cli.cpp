@@ -15,8 +15,8 @@ namespace k = kademlia;
 namespace {
 
 const char HELP[] =
-"save <KEY> <VALUE>\n\tSave <VALUE> as <KEY>\n\n"
-"load <KEY>\n\tLoad value associated with <KEY>\n\n"
+"put <KEY> <VALUE>\n\tSave <VALUE> as <KEY>\n\n"
+"get <KEY>\n\tGet value associated with <KEY>\n\n"
 "help\n\tPrint this message\n\n";
 
 std::vector< std::string >
@@ -36,12 +36,11 @@ load( k::session & session
                            , k::session::data_type const& data )
     {
         if ( error )
-            std::cerr << "Failed to load \"" << key << "\"" << std::endl;
+            std::cerr << "ERROR" << std::endl;
         else
         {
             std::string const& str{ data.begin(), data.end() };
-            std::cout << "Loaded \"" << key << "\" as \""
-                      << str << "\"" << std::endl;
+            std::cout << str << std::endl;
         }
     };
 
@@ -56,9 +55,9 @@ save( k::session & session
     auto on_save = [ key ] ( std::error_code const& error )
     {
         if ( error )
-            std::cerr << "Failed to save \"" << key << "\"" << std::endl;
+            std::cout << "ERROR" << std::endl;
         else
-            std::cout << "Saved \"" << key << "\"" << std::endl;
+            std::cout << "SUCCESS" << std::endl;
     };
 
     session.async_save( key, value, std::move( on_save ) );
@@ -112,14 +111,14 @@ int main
         {
             print_interactive_help();
         }
-        else if ( tokens[0] == "save" )
+        else if ( tokens[0] == "get" )
         {
             if ( tokens.size() != 3 )
                 print_interactive_help();
             else
                 save( session, tokens[1], tokens[2] );
         }
-        else if ( tokens[0] == "load" )
+        else if ( tokens[0] == "put" )
         {
             if ( tokens.size() != 2 )
                 print_interactive_help();
