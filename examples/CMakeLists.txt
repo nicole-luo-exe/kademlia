@@ -29,9 +29,19 @@ target_link_libraries(kademlia_cli
     kademlia
     Threads::Threads)
 
+add_executable(sock_server
+    cli_sock.cpp)
+
+target_link_libraries(sock_server
+    kademlia
+    Threads::Threads)
+
 add_executable(kademlia_bootstrap
     bootstrap.cpp)
 
 target_link_libraries(kademlia_bootstrap
     kademlia
     Threads::Threads)
+
+add_executable(sock_client
+    client.cpp)

@@ -110,14 +110,14 @@ int main
         {
             print_interactive_help();
         }
-        else if ( tokens[0] == "get" )
+        else if ( tokens[0] == "put" )
         {
             if ( tokens.size() != 3 )
                 print_interactive_help();
             else
                 save( session, tokens[1], tokens[2] );
         }
-        else if ( tokens[0] == "put" )
+        else if ( tokens[0] == "get" )
         {
             if ( tokens.size() != 2 )
                 print_interactive_help();
