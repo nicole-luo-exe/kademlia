@@ -41,10 +41,24 @@ int main() {
 			perror("connect");
 			ok = 0;
 		}
-	}
+	}   
+    // if (ok) {
+	// 	strcpy (buff, "get key1");
+	// 	if (send(fd, buff, strlen(buff)+1, 0) == -1) {
+	// 		perror("send");
+	// 		ok = 0;
+	// 	}
+	// 	printf ("sent command\n");
+	// }
 
 	if (ok) {
-		strcpy (buff, "get key1");
+		strcpy (buff, "put key2 6"); // the 6 must include the null char
+		if (send(fd, buff, strlen(buff)+1, 0) == -1) {
+			perror("send");
+			ok = 0;
+		}
+
+		strcpy (buff, "hello");
 		if (send(fd, buff, strlen(buff)+1, 0) == -1) {
 			perror("send");
 			ok = 0;
